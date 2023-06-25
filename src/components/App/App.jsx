@@ -1,12 +1,15 @@
-import css from './App.module.css';
+import { Route, Routes } from 'react-router-dom';
+import Layout from '../Layout/Layout';
+import Contacts from '../../pages/Contacts/Contacts';
 
 function App() {
   return (
     <>
-      <header className={css.block}>
-        <p className={css.textMain}>REACT APP TEMPLATE</p>
-        <p className={css.textSecondary}>USE IT</p>
-      </header>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Contacts />} />
+        </Route>
+      </Routes>
     </>
   );
 }
