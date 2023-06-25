@@ -8,18 +8,18 @@ const filterSlice = createSlice({
     setFilter: (state, { payload }) => {
       state.filter = payload;
     },
-    setActiveType: (state, { payload }) => {
-      if (state.activeTypes.some(i => i === payload.name)) {
-        const typeIndex = state.activeTypes.indexOf(payload.name);
-        state.activeTypes.splice(typeIndex, 1);
-        return;
-      }
+    // setActiveType: (state, { payload }) => {
+    //   if (state.activeTypes.some(i => i === payload.name)) {
+    //     const typeIndex = state.activeTypes.indexOf(payload.name);
+    //     state.activeTypes.splice(typeIndex, 1);
+    //     return;
+    //   }
 
-      state.activeTypes.push(payload.name);
-    },
-    clearActiveTypes: (state, { payload }) => {
-      state.activeTypes = [];
-    },
+    //   state.activeTypes.push(payload.name);
+    // },
+    // clearActiveTypes: (state, { payload }) => {
+    //   state.activeTypes = [];
+    // },
   },
 });
 

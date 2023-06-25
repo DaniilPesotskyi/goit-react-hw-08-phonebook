@@ -44,14 +44,14 @@ const contactsSlice = createSlice({
         state.contacts.isLoading = false;
         state.contacts.items.push(payload);
       })
-      .addCase(fetchTypes.fulfilled, (state, { payload }) => {
-        state.contacts.isLoading = false;
-        state.contactTypes = payload;
-      })
-      .addCase(createType.fulfilled, (state, { payload }) => {
-        state.contacts.isLoading = false;
-        state.contactTypes.push(payload);
-      })
+      // .addCase(fetchTypes.fulfilled, (state, { payload }) => {
+      //   state.contacts.isLoading = false;
+      //   state.contactTypes = payload;
+      // })
+      // .addCase(createType.fulfilled, (state, { payload }) => {
+      //   state.contacts.isLoading = false;
+      //   state.contactTypes.push(payload);
+      // })
       .addMatcher(action => {
         action.type.endsWith('/pending');
       }, handlePending)

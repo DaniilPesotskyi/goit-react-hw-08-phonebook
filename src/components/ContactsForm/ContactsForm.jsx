@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import css from './ContactsForm.module.css';
 import { useState } from 'react';
-import { getContactTypes, getContacts } from '../../redux/selectors';
+import { getContacts } from '../../redux/selectors';
 import { createContact } from '../../redux/operations';
 
 const ContactsForm = ({ close }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [type, setType] = useState('');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { contactTypes } = useSelector(getContactTypes);
+  // const [type, setType] = useState('');
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // const { contactTypes } = useSelector(getContactTypes);
   const { items } = useSelector(getContacts);
 
   const dispatch = useDispatch();
@@ -38,16 +38,16 @@ const ContactsForm = ({ close }) => {
       createContact({
         name,
         number,
-        type,
+        // type,
       })
     );
     close();
   };
 
-  const handleOptionClick = e => {
-    setIsDropdownOpen(false);
-    setType(e.currentTarget.textContent);
-  };
+  // const handleOptionClick = e => {
+  //   setIsDropdownOpen(false);
+  //   setType(e.currentTarget.textContent);
+  // };
 
   return (
     <div className={css.backdrop}>
@@ -85,7 +85,7 @@ const ContactsForm = ({ close }) => {
               Number
             </label>
           </div>
-          <div className={css.typeInputField}>
+          {/* <div className={css.typeInputField}>
             <p className={css.typeLabel}>Type</p>
             <div
               className={css.typeInput}
@@ -107,7 +107,7 @@ const ContactsForm = ({ close }) => {
                 </ul>
               )}
             </div>
-          </div>
+          </div> */}
           <button className={css.submitButton} type="submit">
             ADD CONTACT
           </button>
