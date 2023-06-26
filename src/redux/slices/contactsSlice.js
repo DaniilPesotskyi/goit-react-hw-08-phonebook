@@ -57,6 +57,7 @@ const contactsSlice = createSlice({
         action.type.endsWith('/rejected');
       }, handleRejected);
   },
+  
 });
 
 export const contactsReducer = contactsSlice.reducer;
