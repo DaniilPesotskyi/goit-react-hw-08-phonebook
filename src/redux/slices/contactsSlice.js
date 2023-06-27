@@ -4,6 +4,7 @@ import {
   createContact,
   deleteContact,
   fetchContacts,
+  updateContact,
 } from '../operations';
 
 const handlePending = state => {
@@ -42,14 +43,15 @@ const contactsSlice = createSlice({
         state.contacts.isLoading = false;
         state.contacts.items.push(payload);
       })
-      // .addCase(fetchTypes.fulfilled, (state, { payload }) => {
-      //   state.contacts.isLoading = false;
-      //   state.contactTypes = payload;
-      // })
-      // .addCase(createType.fulfilled, (state, { payload }) => {
-      //   state.contacts.isLoading = false;
-      //   state.contactTypes.push(payload);
-      // })
+      .addCase(updateContact.fulfilled, (state, { payload }) => {
+        state.contacts.isLoading = false;
+        state.contacts.items = state.contacts.items.map(contact => {
+          if (contact.id === payload.id) {
+            return payload;
+          }
+          return contact;
+        });
+      })
       .addMatcher(action => {
         action.type.endsWith('/pending');
       }, handlePending)
@@ -60,4 +62,3 @@ const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
-// export const { createType } = contactsSlice.actions;

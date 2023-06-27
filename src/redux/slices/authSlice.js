@@ -31,7 +31,7 @@ const authSlice = createSlice({
         state.token = payload.token;
         state.isLoggedIn = true;
       })
-      .addCase(logOut.fulfilled, (state, { payload }) => {
+      .addCase(logOut.fulfilled, (state) => {
         state.user = { name: null, email: null };
         state.token = null;
         state.isLoggedIn = false;
@@ -40,7 +40,7 @@ const authSlice = createSlice({
       }, handlePending)
       .addMatcher(action => {
         action.type.endsWith('/rejected');
-      }, handleRejected);;
+      }, handleRejected);
   },
 });
 

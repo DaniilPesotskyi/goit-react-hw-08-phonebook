@@ -7,9 +7,6 @@ import { createContact } from '../../redux/operations';
 const ContactsForm = ({ close }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  // const [type, setType] = useState('');
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  // const { contactTypes } = useSelector(getContactTypes);
   const { items } = useSelector(getContacts);
 
   const dispatch = useDispatch();
@@ -38,16 +35,10 @@ const ContactsForm = ({ close }) => {
       createContact({
         name,
         number,
-        // type,
       })
     );
     close();
   };
-
-  // const handleOptionClick = e => {
-  //   setIsDropdownOpen(false);
-  //   setType(e.currentTarget.textContent);
-  // };
 
   return (
     <div className={css.backdrop}>
@@ -85,29 +76,6 @@ const ContactsForm = ({ close }) => {
               Number
             </label>
           </div>
-          {/* <div className={css.typeInputField}>
-            <p className={css.typeLabel}>Type</p>
-            <div
-              className={css.typeInput}
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              <p className={css.typeValue}>{type}</p>
-              {isDropdownOpen && (
-                <ul className={css.dropdownMenu}>
-                  {contactTypes &&
-                    contactTypes.map(i => (
-                      <li
-                        key={i.id}
-                        className={css.dropdownMenuItem}
-                        onClick={handleOptionClick}
-                      >
-                        {i.name}
-                      </li>
-                    ))}
-                </ul>
-              )}
-            </div>
-          </div> */}
           <button className={css.submitButton} type="submit">
             ADD CONTACT
           </button>
