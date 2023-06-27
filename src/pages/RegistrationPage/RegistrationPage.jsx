@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import css from './RegistrationPage.module.css';
+import { useDispatch } from 'react-redux';
+import { register } from '../../redux/authOperations';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onInputChange = e => {
     switch (e.currentTarget.name) {
@@ -22,10 +27,23 @@ const RegistrationPage = () => {
     }
   };
 
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    console.log(name, email, password);
+    await dispatch(
+      register({
+        name: name,
+        email: email,
+        password: password,
+      })
+    );
+    await navigate("/contacts")
+  };
+
   return (
     <>
       <h1 className={css.pageTitle}>Registration</h1>
-      <form className={css.form} autoComplete="off">
+      <form className={css.form} autoComplete="off" onSubmit={handleSubmit}>
         <div className={css.inputList}>
           <input
             type="text"

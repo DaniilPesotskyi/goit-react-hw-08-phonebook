@@ -7,7 +7,7 @@ const AuthHeader = () => {
       <ul>
         <li className={css.nav}>
           <NavLink to="/login">Log In</NavLink>
-          <NavLink to="/register">Log In</NavLink>
+          <NavLink to="/register">Register</NavLink>
         </li>
       </ul>
     </div>
