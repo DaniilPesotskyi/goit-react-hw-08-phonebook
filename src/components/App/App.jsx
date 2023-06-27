@@ -7,6 +7,7 @@ import { PrivateRoute } from '../PrivateRoute';
 import { useEffect } from 'react';
 import { refreshUser } from '../../redux/authOperations';
 import { useDispatch } from 'react-redux';
+import HomePage from '../../pages/HomePage/HomePage';
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegistrationPage />} />
           <Route
