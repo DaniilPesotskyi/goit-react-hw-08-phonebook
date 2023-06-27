@@ -1,11 +1,12 @@
 import { Outlet } from "react-router-dom";
+import AuthHeader from "./AuthHeader/AuthHeader";
 
 const Layout = () => {
   return (
-    <div>
+    <div style={{ maxWidth: 1530, margin: '0 auto'}}>
       <header>
-        <div style={{ maxWidth: 1530, margin: '0 auto'}}>
-          
+        <div>
+          <AuthHeader />
         </div>
       </header>
       <main style={{ maxWidth: 1530, margin: '0 auto'}}>

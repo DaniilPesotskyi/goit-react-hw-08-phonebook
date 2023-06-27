@@ -20,7 +20,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <h1 className={css.pageTitle}>LOGIN</h1>
+      <h1 className={css.pageTitle}>Login</h1>
       <form className={css.form} autoComplete="off">
         <div className={css.inputList}>
           <input
