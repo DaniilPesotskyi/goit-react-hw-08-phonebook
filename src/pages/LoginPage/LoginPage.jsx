@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import css from './LoginPage.module.css';
-import { logIn } from '../../redux/authOperations';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { logIn } from '../../redux/operations';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');

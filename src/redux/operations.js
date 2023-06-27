@@ -1,12 +1,74 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
+
+const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+const clearAuthHeader = () => {
+  axios.defaults.headers.common.Authorization = '';
+};
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async (user, thunkAPI) => {
+    try {
+      const { data } = await axios.post('/users/signup', user);
+      setAuthHeader(data.token);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const logIn = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+  try {
+    const { data } = await axios.post('/users/login', user);
+    setAuthHeader(data.token);
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    await axios.post('/users/logout');
+    clearAuthHeader();
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const refreshUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+
+    try {
+      setAuthHeader(persistedToken);
+      const { data } = await axios.get('/users/current');
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   async (_, thunkAPI) => {
     try {
       const contacts = await axios.get(
-        `https://648ed18875a96b664444517b.mockapi.io/contacts`
+        `/contacts`
       );
       return contacts.data;
     } catch (error) {
@@ -20,7 +82,7 @@ export const createContact = createAsyncThunk(
   async (contact, thunkAPI) => {
     try {
       const contacts = await axios.post(
-        `https://648ed18875a96b664444517b.mockapi.io/contacts`,
+        `/contacts`,
         contact
       );
 
@@ -36,7 +98,7 @@ export const deleteContact = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       await axios.delete(
-        `https://648ed18875a96b664444517b.mockapi.io/contacts/${id}`
+        `/contacts/${id}`
       );
       return id;
     } catch (error) {

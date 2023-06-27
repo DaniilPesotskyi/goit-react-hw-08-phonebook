@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import css from './RegistrationPage.module.css';
 import { useDispatch } from 'react-redux';
-import { register } from '../../redux/authOperations';
 import { useNavigate } from 'react-router-dom';
+import { register } from '../../redux/operations';
 
 const RegistrationPage = () => {
   const [name, setName] = useState('');
